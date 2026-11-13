@@ -8,7 +8,9 @@ The current `DESIGN.md` is a system-design baseline, not a research proposal org
 
 - Reframe the research proposal into **A. Attention Getter, B. Challenge, C. Cure, D. Development, E. Experiments, and F. Expected Findings**.
 - Refactor the Introduction around the DIC3 general-to-specific progression: context, gap, literature positioning, judgment, key point, and organization.
-- Refactor Related Work to balance AI methods (forecasting and agent systems) with indoor-air-quality domain knowledge (pollutants, sensing, ventilation, standards, and safety).
+- Refactor Related Work to balance AI methods (forecasting and agent systems) with indoor-air-quality domain knowledge (pollutants, sensing, ventilation, standards, and safety); include a source-qualified Article Summary Table that distinguishes primary research, reviews, peer-reviewed publications, and preprints.
+- Integrate the existing eight-module architecture, operational flowchart, and numbered pseudocode from `DESIGN.md` into the submission-facing proposal without changing module boundaries or safety limits.
+- Define proposed pollution-event onset, 30-minute warning scoring, lead-time and exceedance-duration calculations, comparator systems, RAG/IAQ-rule ablations, and simulation assumptions.
 - Explicitly discuss five domain mindsets: mass balance, exposure over time, sensor drift, airflow/pressure, and health/energy trade-offs.
 - Analyze three controversies and their trade-offs: filtration versus ventilation, low-cost sensor reliability, and autonomous action versus human oversight.
 - Formulate ten deep research questions covering assumptions, failure modes, trade-offs, and evidence requirements.
@@ -35,5 +37,5 @@ None. The repository has no existing OpenSpec capability specifications.
 
 - Adds planning artifacts under `openspec/changes/airguard-proposal-refactor/`.
 - Uses the root `DESIGN.md` as the authoritative source; that file remains unchanged.
-- Adds a research-proposal document and checked citation records; no application source code, APIs, dependencies, or experimental results are added or changed. The repository currently has no application implementation to describe as completed.
+- Adds a research-proposal document with evidence-qualified primary-study summaries and checked citation records; inaccessible source details and project-specific evidence gaps remain explicit. No application source code, APIs, dependencies, or experimental results are added or changed. The repository currently has no application implementation to describe as completed.
 - The proposed architecture, technical stack, quantitative targets, and evaluation plan remain proposals until verified through implementation and experiments.

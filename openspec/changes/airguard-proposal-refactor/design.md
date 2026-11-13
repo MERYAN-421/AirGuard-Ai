@@ -6,7 +6,7 @@ See `proposal.md` for the motivation and scope. The repository has a proposal-ba
 
 The change translates the source design into a course-proposal structure and testable capability boundaries. The root `DESIGN.md` remains authoritative and unchanged.
 
-The assignment-facing draft is now in the repository-root [proposal.md](../../../proposal.md). It contains the six A–F abstract sections, the G–L Introduction progression, a balanced AI/domain Related Work section, the five mindsets, three controversies, ten research questions, planned experiments, and a qualified references/source-status record.
+The assignment-facing draft is in the repository-root [proposal.md](../../../proposal.md). It retains the six A–F abstract sections and G–L Introduction, adds an evidence-qualified primary-study summary table, incorporates the source design's architecture, flowchart, and numbered algorithm, and defines proposed event, warning, policy-comparison, ablation, and simulation measures. The root proposal records which source material was accessible and which claims remain unverified.
 
 ## Goals / Non-Goals
 
@@ -43,28 +43,35 @@ The abstract will use the exact requested A–F labels:
 
 ### Refactored Introduction
 
-Use the DIC3 G–L progression to move from the general indoor-air monitoring problem to the study contribution. The completed draft is in the repository-root [proposal.md](../../../proposal.md); citation-specific claims are limited to verified metadata or source abstracts and are qualified where full text was unavailable.
+Use the DIC3 G–L progression to move from the general indoor-air monitoring problem to the study contribution. The Introduction now distinguishes three different limitations: monitoring/threshold alerts describe sampled conditions but do not by themselves select an intervention; numerical forecasts estimate future values but do not establish rule applicability or action safety; and a chatbot without grounded tools cannot validate measurements, standards, or devices. It explains why the proposed domain-grounded agent coordinates these roles while keeping numeric risk decisions deterministic and physical action outside the MVP.
 
-1. **General (G):** Indoor air-quality decisions depend on observations that change with pollutant sources, occupancy, ventilation, and outdoor conditions. A monitoring proposal therefore needs to connect measurements to their time, location, units, and quality rather than treating a displayed value as context-free.
-2. **However (H):** A threshold notification alone does not establish which response is appropriate. The proposed system must account for sensor freshness and uncertainty, pollutant-specific behavior, outdoor-air trade-offs, applicable averaging periods, and the capabilities of the installed equipment.
-3. **In literature (I):** Position the study against two bodies of work to be reviewed: data-driven air-quality forecasting and AI/agent-based decision support; and indoor-air domain work on pollutant measurement, ventilation, filtration, exposure, and standards. Do not state comparative literature findings until relevant papers and their methods are verified and cited.
-4. **Judgment (J):** This proposal treats prediction and generated language as decision support, not as authority. Numeric risk classification belongs to versioned deterministic rules; retrieval supplies attributable context; and actuation remains advisory or simulated unless separately authorized and made safe.
-5. **Keypoint (K):** The study asks whether a traceable IoT-to-recommendation workflow can provide useful short-horizon warnings and explainable, safety-constrained actions without overstating sensor evidence or evaluation results.
-6. **Organization (L):** The proposal introduces related AI and domain work, defines the system and safety design, formulates ten research questions, and presents an evaluation protocol with explicit baselines, metrics, limitations, and evidence status.
+1. **General (G):** Ground the problem in measured indoor-air conditions and pollutant-specific context, not a context-free reading.
+2. **However (H):** Explain limits of sampled/threshold monitoring, short-horizon prediction, and AI-assisted decision support separately.
+3. **In literature (I):** Compare the indoor classroom filtration/ventilation study [1], the abstract-only IEEE IAQ forecasting study [2], the HVAC QA agent study [3], and the BEMS agent preprint [4]. The gap is explicitly scoped to this reviewed set, not stated as a systematic novelty claim.
+4. **Judgment (J):** Justify the domain-grounded agent as an orchestration layer over quality checks, forecasts, deterministic IAQ rules, attributed retrieval, and constrained action candidates; it does not replace these components.
+5. **Keypoint (K):** Ask whether this traceable workflow can improve useful warning and policy evaluation without overstating evidence.
+6. **Organization (L):** Preview the article table, design artifacts, research questions, evaluation definitions, and proposal-only evidence status.
 
 ### Refactored Related Work
 
-Organize Related Work by the evidence needed to answer the research questions, balancing AI methods and domain constraints. The repository-root [proposal.md](../../../proposal.md) implements this framing. Preprint statements are attributed to the authors, metadata-only records carry no performance claims, and unavailable full text/regulatory materials are recorded as verification gaps.
+The repository-root [proposal.md](../../../proposal.md) contains the required eight-column Article Summary Table. It distinguishes four empirical primary studies from two supporting reviews, and labels the He/Jazizadeh and Neubauer arXiv works as preprints. It limits Singh et al. [2] to author-abstract claims, uses JARVIS [3] only to the extent described in the Crossref-deposited abstract, and attributes the He/Jazizadeh measurements and prototype scores to their preprint authors. The full Aldekheel article [1] and He/Jazizadeh preprint [4] were accessible; inaccessible publisher details are not reconstructed.
 
-| Theme | AI / technical focus | Air-quality domain focus | Comparison questions |
-|---|---|---|---|
-| Time-series sensing and forecasting | Persistence and statistical baselines; candidate LightGBM and LSTM models; input windows, forecast horizons, uncertainty | Indoor PM2.5 as the initial target; CO2 only with indoor measurements; sampling, humidity sensitivity, drift, and indoor/outdoor differences | Which horizon and target are supported by the available data? Are splits chronological and transformations fitted without leakage? |
-| Data quality and calibration | Missingness, anomaly detection, data alignment, calibration methods | Sensor type, reference co-location, humidity effects, pollutant-specific response, event-versus-fault ambiguity | What evidence validates correction, and how are suspect values prevented from becoming ground truth? |
-| Knowledge-grounded decision support | Retrieval-augmented generation, tool use, structured evidence, deterministic rules | Indoor versus outdoor standards, averaging times, applicability, device manuals, ventilation and filtration constraints | Can every rule and recommendation be traced to an applicable, versioned source? What must remain deterministic? |
-| Agent safety and actuation | Planning, permissions, tool boundaries, human approval, auditability | HVAC/device limits, interlocks, safe fallback, occupant comfort, outdoor pollution | Which actions can be simulated or advised, and what independent safeguards would be required before physical control? |
-| Evaluation and usability | Chronological model evaluation, ablation/comparator design, explanation and task measures | Exposure proxies, exceedance duration, energy proxies, false alarms, site conditions | Are outcomes comparable under shared conditions and reported without implying clinical or regulatory conclusions? |
+The scoped synthesis is that the reviewed studies separately address classroom measurement/intervention, IAQ prediction, or building-energy/HVAC question answering. The proposal asks whether an auditable workflow can integrate those functions for indoor-air decisions. This is not a systematic-review finding that no such integration exists elsewhere; a broader search is required before a novelty claim.
 
-The source register in the repository-root [proposal.md](../../../proposal.md) records checked records and unresolved gaps. Candidate sources listed in `DESIGN.md` (including named arXiv identifiers, standards, and data services) must still be checked against their original full text, scope, version, and terms before final submission. If a source cannot be verified, omit it or mark the gap; do not infer a finding or citation.
+### Proposed Scheme and Evaluation Protocol
+
+The root proposal incorporates the eight-module architecture diagram, the operational flowchart, and the numbered algorithm from the unchanged `DESIGN.md`. Module roles, conceptual data flow, and safeguards are preserved: advisory is the default, simulation is the proposed MVP action mode, and physical actuation remains outside scope.
+
+The evaluation now uses explicit proposed definitions:
+
+- A pollution event begins at the first of two consecutive valid averaging windows above a predeclared site/pollutant threshold. The threshold, averaging period, units, cadence, and data-quality rules must be fixed before test scoring; missing/invalid intervals are unevaluable.
+- A forecast warning targets exceedance at the issue time plus 30 minutes. Event lead time is onset minus the first qualifying warning in the preceding 30-minute interval; repeated alerts are grouped into episodes under the fixed clear rule.
+- Paired policy simulations use identical initial state, external conditions, action constraints, and random seed. Exceedance reduction is `100 × (D_baseline − D_AirGuard) / D_baseline`; it is undefined if baseline duration is zero.
+- Forecast baselines are persistence/statistical methods, with LightGBM/LSTM as candidates; warnings compare current-threshold and forecast-based policies; decision policies compare a rule-based baseline with the integrated policy.
+- The RAG/IAQ-rule ablation compares the full system, no-RAG, no-IAQ-decision-rules, and neither. Hard safety interlocks and physical-dispatch prohibition remain enabled in every arm.
+- The single-zone, well-mixed simulator is a proposal assumption. Parameter sources, sensitivities, simplifications, and the conditional nature of simulated outcomes must be reported.
+
+The evaluation-protocol delta spec is extended to require these definitions and comparisons. No experiment or improvement target is asserted as completed.
 
 ### Five core domain mindsets
 
@@ -123,7 +130,9 @@ No values such as the unverified control accuracy, energy savings, or avoidance 
 
 ### Source verification status
 
-The proposal's reference list records verified metadata for the cited journal/conference records, arXiv preprints, and WHO publications, together with the material actually inspected. Official documentation pages checked include the [OpenAQ API documentation](https://docs.openaq.org/), [Taiwan MOENV data portal](https://data.moenv.gov.tw/), [LASS/AirBox portal](https://lass-net.org/), and [LASS DCF status page](https://pm25.lass-net.org/DCF/). These page checks do not establish that a specific dataset, API term, calibration result, or sensor is suitable for the project. The exact current Taiwan legal provisions and indoor applicability, ASHRAE edition/clauses, selected data terms, and full texts not accessed remain unresolved and are not represented as verified.
+The proposal's reference list records the metadata and material inspected for each source. Full text was reviewed for the Aldekheel classroom study [1] and the He/Jazizadeh energy-agent preprint [4]. IEEE/Crossref metadata and an indexed author abstract were available for Singh et al. [2], but the full paper was inaccessible; ACM/Crossref metadata and the publisher-deposited abstract were available for JARVIS [3], but the full article was inaccessible. The full arXiv text was reviewed for the Neubauer review preprint [6]; Concas et al. [5] was used only as a review. WHO publication scopes were checked.
+
+Official documentation pages checked include the [OpenAQ API documentation](https://docs.openaq.org/), [Taiwan MOENV data portal](https://data.moenv.gov.tw/), [LASS/AirBox portal](https://lass-net.org/), and [LASS DCF status page](https://pm25.lass-net.org/DCF/). These page checks do not establish that a specific dataset, API term, calibration result, or sensor is suitable for the project. The exact current Taiwan legal provisions and indoor applicability, ASHRAE edition/clauses, selected data terms, and actual site/device availability remain unresolved and are not represented as verified.
 
 ## Risks / Trade-offs
 

@@ -71,3 +71,62 @@ When an approved usability study is conducted, the evaluation SHALL report task 
 #### Scenario: Usability study is unavailable
 - **WHEN** participants or required approval are unavailable
 - **THEN** the report marks usability as not assessed and does not imply user validation
+
+### Requirement: Pollution events use predeclared operational definitions
+The evaluation SHALL declare the site, pollutant, threshold, averaging period, valid sampling grid, and persistence condition before scoring pollution events.
+
+#### Scenario: Event onset is scored
+- **WHEN** two consecutive valid averaging windows exceed the predeclared threshold
+- **THEN** event onset is the timestamp of the first of those windows
+
+#### Scenario: Event window contains invalid data
+- **WHEN** a required averaging window is missing or invalid
+- **THEN** the affected event interval is marked unevaluable and missing values are not interpolated to create an event
+
+### Requirement: Warning scores use a fixed 30-minute forecast horizon
+The evaluation SHALL issue a forecast warning only when the forecast predicts threshold exceedance at issue time plus 30 minutes and compute event lead time within the fixed pre-onset interval.
+
+#### Scenario: Forecast warning precedes an event
+- **WHEN** the forecast at issue time predicts threshold exceedance at issue time plus 30 minutes and is issued from 30 minutes before event onset up to, but not including, onset
+- **THEN** lead time is event onset minus the earliest qualifying warning time and is reported as no greater than 30 minutes
+
+#### Scenario: Event has no qualifying warning
+- **WHEN** no qualifying warning is issued in the 30 minutes before an event
+- **THEN** the event is counted as a false negative
+
+#### Scenario: Warning is not followed by an event
+- **WHEN** a warning episode is not followed by an event onset for the same site and pollutant within 30 minutes
+- **THEN** the warning episode is counted as a false alarm
+
+### Requirement: Exceedance reduction uses paired simulations
+The evaluation SHALL compare durations, defined as summed valid simulation intervals above the threshold, under matched initial state, external conditions, action constraints, and random seed.
+
+#### Scenario: Baseline and AirGuard durations are compared
+- **WHEN** both policies are simulated under the same declared scenario
+- **THEN** the report provides absolute durations and calculates reduction as 100 × (baseline duration − AirGuard duration) / baseline duration
+
+#### Scenario: Baseline has no exceedance duration
+- **WHEN** the baseline exceedance duration is zero
+- **THEN** percentage reduction is reported as undefined or not computable, not as zero or 100 percent
+
+### Requirement: RAG and IAQ-rule ablations retain hard safety controls
+The evaluation SHALL compare the full system, no-RAG, no-IAQ-decision-rules, and neither variants while keeping physical-dispatch prohibition and hard safety checks enabled in every arm.
+
+#### Scenario: Ablation variant is evaluated
+- **WHEN** a RAG or IAQ decision-rule component is omitted for comparison
+- **THEN** the report identifies the omitted component and retains permissions, device limits, interlocks, and physical-dispatch prohibition
+
+#### Scenario: Ablation proposes an unsafe command
+- **WHEN** an ablation variant proposes a command that fails a hard safety check
+- **THEN** the command is blocked and recorded rather than dispatched
+
+### Requirement: Simulation assumptions and parameter provenance are reported
+The evaluation SHALL identify its simulator structure, parameter sources or declared assumptions, common exogenous inputs, and material limitations; simulated outcomes SHALL NOT be reported as field results.
+
+#### Scenario: Simulation results are reported
+- **WHEN** a policy result is computed in the proposed single-zone simulator
+- **THEN** the report labels it simulated and documents parameter provenance, shared scenario inputs, and limitations relevant to interpretation
+
+#### Scenario: A simulation parameter is unavailable
+- **WHEN** a required parameter has no site measurement or verified source
+- **THEN** the report labels the assumption and analyzes sensitivity rather than presenting it as measured

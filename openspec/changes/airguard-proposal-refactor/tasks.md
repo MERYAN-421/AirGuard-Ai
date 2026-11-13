@@ -15,6 +15,13 @@
 
 ## 3. Proposal Review and Handoff
 
-- [x] 3.1 Confirm actual sensor/site availability, applicable standards, reference measurements, and simulator access; document unknowns as limitations instead of assuming they are available.
+- [x] 3.1 Inventory repository evidence for sensor/site availability, applicable standards, reference measurements, and simulator access; document unavailable or unverified items as limitations instead of assuming they are available.
 - [x] 3.2 Review proposal, design, tasks, and specs together; verify all system capabilities remain labeled proposed until implemented and evaluated, with no fabricated citations or results.
 - [x] 3.3 Verify the final diff contains only the intended research-proposal and OpenSpec documentation artifacts and that the root `DESIGN.md` and application source remain unchanged.
+
+## 4. Final Documentation Refinement
+
+- [x] 4.1 Verify primary-study metadata, methods, datasets, and findings from accessible source material; label publication status and record inaccessible details as evidence gaps.
+- [x] 4.2 Refine the submission-facing Introduction and Related Work; verify A–F/G–L headings and all eight Article Summary Table columns are present and evidence-qualified.
+- [x] 4.3 Integrate the source architecture, operational flowchart, and numbered pseudocode; verify proposed event, warning, comparator, ablation, simulation, and metric definitions.
+- [x] 4.4 Reconcile all seven specs with the proposal and source design; run strict OpenSpec validation and verify `DESIGN.md` and application source remain unchanged.
