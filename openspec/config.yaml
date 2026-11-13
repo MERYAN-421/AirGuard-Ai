@@ -1,0 +1,36 @@
+schema: spec-driven
+
+context: |
+  Project: AirGuard AI
+
+  AirGuard AI is a proactive indoor air quality
+  protection agent integrating IoT sensor streams,
+  air quality forecasting, domain knowledge,
+  RAG, and LLM-based decision support.
+
+  The root DESIGN.md is the project-level
+  architecture and planning reference.
+
+  Read DESIGN.md before proposing architectural
+  changes or implementing new capabilities.
+
+  Development priorities:
+  1. Sensor data ingestion
+  2. Data quality validation
+  3. Air quality forecasting
+  4. Domain knowledge retrieval
+  5. Agent planning and safety
+  6. Dashboard and audit logging
+  7. Evaluation and verification
+
+rules:
+  proposal:
+    - Align proposed changes with the root DESIGN.md.
+    - Clearly distinguish implemented features from planned features.
+
+  design:
+    - Explain component responsibilities and data flow.
+    - Document assumptions, risks, and safety boundaries.
+
+  tasks:
+    - Include testable acceptance criteria.
